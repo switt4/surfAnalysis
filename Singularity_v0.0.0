@@ -11,10 +11,8 @@ Bootstrap: docker
 From: debian:stretch
 
 %setup
-mkdir src
-cp -Rv surfAnalysis src/
-cp -Rv gifti src/
-cp -Rv dataframe src/
+mkdir $SINGULARITY_ROOTFS/src
+cp -Rv ./ src/
 
 %post
 export ND_ENTRYPOINT="/neurodocker/startup.sh"
@@ -89,6 +87,13 @@ apt-get update -qq
 apt-get install -y -q --no-install-recommends \
     connectome-workbench
 apt-get clean
+
+apt-get install -y libgiftiio-dev
+
+apt-git install -y git
+git clone http://github.com/jdiedrichsen/dataframe
+mv dataframe $SINGULARITY_ROOTFS/src/
+
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 echo '{
