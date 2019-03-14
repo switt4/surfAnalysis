@@ -11,8 +11,8 @@ Bootstrap: docker
 From: debian:stretch
 
 %setup
-mkdir $SINGULARITY_ROOTFS/src
-cp -Rv ./ src/
+#mkdir $SINGULARITY_ROOTFS/src
+#cp -Rv ./ src/
 
 %post
 export ND_ENTRYPOINT="/neurodocker/startup.sh"
