@@ -11,10 +11,10 @@ Bootstrap: docker
 From: debian:stretch
 
 %setup
-mkdir $SINGULARITY_ROOTFS/src
-cp -Rv surfAnalysis $SINGULARITY_ROOTFS/src
-cp -Rv gifti $SINGULARITY_ROOTFS/src
-cp -Rv dataframe $SINGULARITY_ROOTFS/src
+mkdir src
+cp -Rv surfAnalysis src/
+cp -Rv gifti src/
+cp -Rv dataframe src/
 
 %post
 export ND_ENTRYPOINT="/neurodocker/startup.sh"
