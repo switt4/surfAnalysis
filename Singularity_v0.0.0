@@ -89,20 +89,6 @@ apt-get install -y -q --no-install-recommends \
 apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#apt-get update -qq
-#apt-get install -y -q --no-install-recommends \ 
-#    libgiftiio-dev
-#apt-get clean
-
-#apt-get update -qq
-#apt-git install -y -q --no-install-recommends \
-#    git
-#apt-get clean
-#rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-#git clone http://github.com/jdiedrichsen/dataframe
-#git clone https://github.com/gllmflndn/gifti
-
-
 echo '{
 \n  "pkg_manager": "apt",
 \n  "instructions": [
@@ -139,6 +125,19 @@ echo '{
 \n    ]
 \n  ]
 \n}' > /neurodocker/neurodocker_specs.json
+
+#apt-get update -qq
+#apt-get install -y -q --no-install-recommends \ 
+#    libgiftiio-dev
+#apt-get clean
+
+apt-get update -qq
+apt-git install -y -q --no-install-recommends \
+    git
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+git clone http://github.com/jdiedrichsen/dataframe
+git clone https://github.com/gllmflndn/gifti
 
 %environment
 export LANG="en_US.UTF-8"
