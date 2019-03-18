@@ -127,6 +127,10 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 wget https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license
 mv freesurfer_license /opt/freesurfer-6.0.1/license.txt
 
+wget https://ftp.humanconnectome.org/workbench/workbench-linux64-v1.3.2.zip
+unzip workbench-linux64-v1.3.2.zip
+cp -Rv workbench opt/
+
 %environment
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -136,6 +140,7 @@ export PATH="/opt/freesurfer-6.0.1/bin:$PATH"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu:/opt/matlabmcr-2018a/v94/runtime/glnxa64:/opt/matlabmcr-2018a/v94/bin/glnxa64:/opt/matlabmcr-2018a/v94/sys/os/glnxa64:/opt/matlabmcr-2018a/v94/extern/bin/glnxa64"
 export MATLABCMD="/opt/matlabmcr-2018a/v94/toolbox/matlab"
 export PATH="/usr/bin:$PATH"
+export PATH="/opt/workbench/bin_linux64:$PATH"
 
 %files
 
