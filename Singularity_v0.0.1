@@ -119,12 +119,13 @@ git clone http://github.com/jdiedrichsen/dataframe
 git clone https://github.com/gllmflndn/gifti
 git clone https://github.com/switt4/surfAnalysis
 
+apt-get update -qq
 apt-get install -y -q --no-install-recommends \
     wget
 apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 wget https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license
-mv freesurfer_license /opt/freesurfer-6.0.1/.
+mv freesurfer_license /opt/freesurfer-6.0.1/license.txt
 
 %environment
 export LANG="en_US.UTF-8"
