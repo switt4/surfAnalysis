@@ -101,13 +101,6 @@ echo '{
 \n      }
 \n    ],
 \n    [
-\n      "copy",
-\n      [
-\n        "/home/ubuntu/src/connectome_wb/fsLicense/license.txt",
-\n        "/opt/"
-\n      ]
-\n    ],
-\n    [
 \n      "matlabmcr",
 \n      {
 \n        "version": "2018a",
@@ -117,7 +110,21 @@ echo '{
 \n  ]
 \n}' > /neurodocker/neurodocker_specs.json
 
-mv /opt/license.txt /opt/freesurfer-6.0.1/.
+apt-get update -qq
+apt-get install -y -q --no-install-recommends \
+    git
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+git clone http://github.com/jdiedrichsen/dataframe
+git clone https://github.com/gllmflndn/gifti
+git clone https://github.com/switt4/surfAnalysis
+
+apt-get install -y -q --no-install-recommends \
+    wget
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+wget https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license
+mv freesurfer_license /opt/freesurfer-6.0.1/.
 
 %environment
 export LANG="en_US.UTF-8"
@@ -129,7 +136,6 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu:/opt/matlabmc
 export MATLABCMD="/opt/matlabmcr-2018a/v94/toolbox/matlab"
 
 %files
-/home/ubuntu/src/connectome_wb/fsLicense/license.txt /opt/
 
 %runscript
 /neurodocker/startup.sh "$@"
