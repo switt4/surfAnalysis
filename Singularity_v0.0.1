@@ -124,9 +124,16 @@ apt-get install -y -q --no-install-recommends \
     wget
 apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+apt-get update -qq
+apt-get install -y -q --no-install-recommends \
+    libfreetype6
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
 wget https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license
 mv freesurfer_license /opt/freesurfer-6.0.1/license.txt
-
 wget https://ftp.humanconnectome.org/workbench/workbench-linux64-v1.3.2.zip
 unzip workbench-linux64-v1.3.2.zip
 cp -Rv workbench opt/
