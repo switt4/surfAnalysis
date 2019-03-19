@@ -79,6 +79,12 @@ unzip -q /tmp/mcr.zip -d /tmp/mcrtmp
 /tmp/mcrtmp/install -destinationFolder /opt/matlabmcr-2018a -mode silent -agreeToLicense yes
 rm -rf /tmp/*
 
+apt-get update -qq
+apt-get install -y -q --no-install-recommends \
+    connectome-workbench
+apt-get clean
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 echo '{
 \n  "pkg_manager": "apt",
 \n  "instructions": [
@@ -106,7 +112,14 @@ echo '{
 \n        "version": "2018a",
 \n        "method": "binaries"
 \n      }
+\n    ],
+\n    [
+\n      "install",
+\n      [
+\n        "connectome-workbench"
+\n      ]
 \n    ]
+\n  ]
 \n  ]
 \n}' > /neurodocker/neurodocker_specs.json
 
@@ -143,9 +156,9 @@ mv freesurfer_license /opt/freesurfer-6.0.1/license.txt
 #mv workbench opt/
 #rm -f workbench-linux64-v1.3.2.zip
 
-wget https://debian.pkgs.org/9/neurodebian-main-amd64/connectome-workbench_1.3.2-2~nd90+1_amd64.deb
-dpkg -i connectome-workbench_1.3.2-2~nd90+1_amd64.deb
-rm -f connectome-workbench_1.3.2-2~nd90+1_amd64.deb
+#wget https://debian.pkgs.org/9/neurodebian-main-amd64/connectome-workbench_1.3.2-2~nd90+1_amd64.deb
+#dpkg -i connectome-workbench_1.3.2-2~nd90+1_amd64.deb
+#rm -f connectome-workbench_1.3.2-2~nd90+1_amd64.deb
 
 wget http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
 dpkg -i libssl1.0.0_1.0.1t-1+deb8u11_amd64.deb
@@ -159,9 +172,11 @@ export FREESURFER_HOME="/opt/freesurfer-6.0.1"
 export PATH="/opt/freesurfer-6.0.1/bin:$PATH"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu:/opt/matlabmcr-2018a/v94/runtime/glnxa64:/opt/matlabmcr-2018a/v94/bin/glnxa64:/opt/matlabmcr-2018a/v94/sys/os/glnxa64:/opt/matlabmcr-2018a/v94/extern/bin/glnxa64"
 export MATLABCMD="/opt/matlabmcr-2018a/v94/toolbox/matlab"
-export PATH="/opt/workbench/bin_linux64:$PATH"
 export PERL5LIB="/opt/freesurfer-6.0.1/mni/lib/perl5/5.8.5"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/workbench/libs_linux64"
+#export PATH="/opt/workbench/bin_linux64:$PATH"
+#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/workbench/libs_linux64"
+export PATH="/usr/bin:$PATH"
+alias wb_command='/usr/bin/wb_command'
 
 %files
 
