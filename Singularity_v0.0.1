@@ -129,21 +129,19 @@ apt-get update -qq
 apt-get install -y -q --no-install-recommends \
     libfreetype6 \
     libglu1-mesa \
-    libssl.dev \
-    libssl1.0.0
+    libssl.dev
 apt-get clean
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ln -s /lib/x86_64-linxu-gnu/libssl.so.1.0.0 /lib/x86_64-linxu-gnu/libssl.so.10
-ln -s /lib/x86_64-linxu-gnu/libcrypto.so.1.0.0 /lib/x86_64-linxu-gnu/libcrypto.so.10
-ln -s /lib/x86_64-linux-gnu/libssl.so.1.0.0 /usr/lib/libssl.so.10
-ln -s /lib/x86_64-linux-gnu/libcrypto.so.1.0.0 /usr/lib/libcrypto.so.10
+ln -s /usr/lib/x86_64-linux-gnu/libssl.so.1.0.2 /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0
+ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.2 /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.0
 
 wget https://www.dropbox.com/s/38gghuq2w7hl7pe/freesurfer_license
 mv freesurfer_license /opt/freesurfer-6.0.1/license.txt
 wget https://ftp.humanconnectome.org/workbench/workbench-linux64-v1.3.2.zip
 unzip workbench-linux64-v1.3.2.zip
-cp -Rv workbench opt/
+mv workbench opt/
+rm -f workbench-linux64-v1.3.2.zip
 
 %environment
 export LANG="en_US.UTF-8"
@@ -153,8 +151,8 @@ export FREESURFER_HOME="/opt/freesurfer-6.0.1"
 export PATH="/opt/freesurfer-6.0.1/bin:$PATH"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu:/opt/matlabmcr-2018a/v94/runtime/glnxa64:/opt/matlabmcr-2018a/v94/bin/glnxa64:/opt/matlabmcr-2018a/v94/sys/os/glnxa64:/opt/matlabmcr-2018a/v94/extern/bin/glnxa64"
 export MATLABCMD="/opt/matlabmcr-2018a/v94/toolbox/matlab"
-export PATH="/usr/bin:$PATH"
 export PATH="/opt/workbench/bin_linux64:$PATH"
+export PERL5LIB="/opt/freesurfer-6.0.1/mni/lib/perl5/5.8.5"
 
 %files
 
